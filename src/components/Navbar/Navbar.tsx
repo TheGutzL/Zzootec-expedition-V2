@@ -30,19 +30,19 @@ const Navbar = () => {
           </InputGroup>
         </div>
         <ul className="flex items-center justify-between space-x-4">
-          <Link color="teal.500">
+          <Link href="/" color="teal.500">
             <span>Inicio</span>
           </Link>
-          <Link color="teal.500">
+          <Link href="/About" color="teal.500">
             <span>Nosotros</span>
           </Link>
-          <Link color="teal.500">
+          <Link href="/products" color="teal.500">
             <span>Tienda</span>
           </Link>
-          <Link color="teal.500">
+          <Link  color="teal.500">
             <span>Contactanos</span>
           </Link>
-          <Link color="teal.500">
+          <Link href="/location" color="teal.500">
             <span>Ubicanos</span>
           </Link>
         </ul>

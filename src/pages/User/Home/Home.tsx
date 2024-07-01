@@ -9,6 +9,7 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -30,6 +31,7 @@ const Home = () => {
               La mejor opción en cuanto a tecnología en todo el mercado y al
               alcance de tu mano{" "}
             </p>
+            <Link to="/about">            
             <Button
               colorScheme="teal"
               size={"md"}
@@ -37,6 +39,7 @@ const Home = () => {
             >
               Ver más
             </Button>
+            </Link>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
