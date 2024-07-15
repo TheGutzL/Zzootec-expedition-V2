@@ -1,11 +1,5 @@
-import {
-  Button,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Link,
-} from "@chakra-ui/react";
-import { SearchIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   return (
@@ -17,38 +11,52 @@ const Navbar = () => {
             alt="Logo"
             className="w-14 h-14 rounded-full"
           />
-          <InputGroup size="md">
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon className="text-gray-300" />
-            </InputLeftElement>
-            <Input
-              type="text"
-              placeholder="Buscar"
-              variant="flushed"
-              width="auto"
-            />
-          </InputGroup>
         </div>
         <ul className="flex items-center justify-between space-x-4">
-          <Link color="teal.500">
-            <span>Inicio</span>
+          <Link to={"/"}>
+            <Button
+              variant="link"
+              className="text-white"
+            >
+              Inicio
+            </Button>
           </Link>
-          <Link color="teal.500">
-            <span>Nosotros</span>
+          <Link to={"/"}>
+            <Button
+              variant="link"
+              className="text-white"
+            >
+              Nosotros
+            </Button>
           </Link>
-          <Link color="teal.500">
-            <span>Tienda</span>
+          <Link to={"/"}>
+            <Button
+              variant="link"
+              className="text-white"
+            >
+              Tienda
+            </Button>
           </Link>
-          <Link color="teal.500">
-            <span>Contactanos</span>
+          <Link to={"/"}>
+            <Button
+              variant="link"
+              className="text-white"
+            >
+              Contactanos
+            </Button>
           </Link>
-          <Link color="teal.500">
-            <span>Ubicanos</span>
+          <Link to={"/"}>
+            <Button
+              variant="link"
+              className="text-white"
+            >
+              Ubicanos
+            </Button>
           </Link>
         </ul>
         <div className="flex justify-center items-center gap-4">
-          <Button colorScheme="teal" size="md">Iniciar Sesion</Button>
-          <Button colorScheme="teal" size="md" variant="ghost">Registrarse</Button>
+          <Button variant="secondary">Iniciar Sesion</Button>
+          <Button variant="secondary">Registrarse</Button>
         </div>
       </div>
     </div>
