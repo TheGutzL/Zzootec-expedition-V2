@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Home = () => {
   return (
     <section className="bg-gray-100">
@@ -18,7 +20,7 @@ const Home = () => {
               La mejor opción en cuanto a tecnología en todo el mercado y al
               alcance de tu mano{" "}
             </p>
-            <button>Ver más</button>
+            <Button>Ver más</Button>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -58,7 +60,7 @@ const Home = () => {
             <p className="text-xl">
               Te ofrecemos un excelente servicio a la mejor calidad/precio
             </p>
-            <button>Ir a la tienda</button>
+            <Button>Ir a la tienda</Button>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -70,7 +72,7 @@ const Home = () => {
             <p className="text-xl">
               Garantizamos que tu compra sea satisfactoria{" "}
             </p>
-            <button>Ubicanos</button>
+            <Button>Ubicanos</Button>
           </div>
           <div className="flex justify-center items-center w-full h-full">
             <img
@@ -92,7 +94,7 @@ const Home = () => {
           <p className="uppercase text-3xl text-center w-1/3">
             Se parte de nuestra gran familia y adquiere tu dispositivo movil
           </p>
-          <button>Comienza Ahora</button>
+          <Button>Comienza Ahora</Button>
         </div>
       </div>
     </section>
