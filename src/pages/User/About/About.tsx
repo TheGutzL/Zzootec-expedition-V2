@@ -1,15 +1,4 @@
-import React from "react";
-import {
-  Box,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  Stack,
-  StackDivider,
-  Text,
-} from "@chakra-ui/react";
+import { Button } from "@/components/ui/button";
 
 const About = () => {
   return (
@@ -31,16 +20,7 @@ const About = () => {
           <p className="text-2xl text-center mt-10">
             Garantizamos que tu compra sea satisfactoria{" "}
           </p>
-          <Button
-            className="mt-14"
-            colorScheme="teal"
-            variant="outline"
-            mx="auto"
-            display="block"
-            width="auto"
-          >
-            Ubícanos
-          </Button>
+          <Button>Ubícanos</Button>
         </div>
         <div className="my-1 mx-1 flex justify-center items-center w-[925px] h-96 border-l-2 border-4">
           <img
@@ -66,11 +46,19 @@ const About = () => {
             <span>Samsung Galaxy S-23</span>
           </div>
           <div className="border rounded-lg p-4 flex flex-col items-center">
-            <img src="./images/modelo2.png" alt="Modelo 2" className="mb-2" />
+            <img
+              src="./images/modelo2.png"
+              alt="Modelo 2"
+              className="mb-2"
+            />
             <span>Modelo 2</span>
           </div>
           <div className="border rounded-lg p-4 flex flex-col items-center">
-            <img src="./images/modelo3.png" alt="Modelo 3" className="mb-2" />
+            <img
+              src="./images/modelo3.png"
+              alt="Modelo 3"
+              className="mb-2"
+            />
             <span>Modelo 3</span>
           </div>
           Agrega más modelos según sea necesario
