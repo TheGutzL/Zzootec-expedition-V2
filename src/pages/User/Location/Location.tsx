@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { TimerIcon } from "lucide-react";
 
 function Location() {
@@ -22,9 +21,9 @@ function Location() {
         />
       </div>
       <div className="flex justify-center items-center my-12 ">
-        <Button>
+        <button>
           <p>VISUALIZANOS EN GOOGLE MAPS</p>
-        </Button>
+        </button>
       </div>
     </div>
   );

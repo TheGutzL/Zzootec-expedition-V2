@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 
 const Home = () => {
   return (
@@ -20,7 +19,7 @@ const Home = () => {
               La mejor opción en cuanto a tecnología en todo el mercado y al
               alcance de tu mano{" "}
             </p>
-            <Button>Ver más</Button>
+            <button>Ver más</button>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -31,7 +30,7 @@ const Home = () => {
             <span className="">
               Te ofrecemos un excelente servicio a la mejor calidad/precio
             </span>
-            <Button className="">Cuentame más</Button>
+            <button className="">Cuentame más</button>
           </div>
           <div className="flex justify-center items-center w-full h-full">
             <img
@@ -60,7 +59,7 @@ const Home = () => {
             <p className="text-xl">
               Te ofrecemos un excelente servicio a la mejor calidad/precio
             </p>
-            <Button>Ir a la tienda</Button>
+            <button>Ir a la tienda</button>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -72,7 +71,7 @@ const Home = () => {
             <p className="text-xl">
               Garantizamos que tu compra sea satisfactoria{" "}
             </p>
-            <Button>Ubicanos</Button>
+            <button>Ubicanos</button>
           </div>
           <div className="flex justify-center items-center w-full h-full">
             <img
@@ -94,7 +93,7 @@ const Home = () => {
           <p className="uppercase text-3xl text-center w-1/3">
             Se parte de nuestra gran familia y adquiere tu dispositivo movil
           </p>
-          <Button>Comienza Ahora</Button>
+          <button>Comienza Ahora</button>
         </div>
       </div>
     </section>

@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 
 const About = () => {
   return (
@@ -20,7 +19,7 @@ const About = () => {
           <p className="text-2xl text-center mt-10">
             Garantizamos que tu compra sea satisfactoria{" "}
           </p>
-          <Button>Ubícanos</Button>
+          <button>Ubícanos</button>
         </div>
         <div className="my-1 mx-1 flex justify-center items-center w-[925px] h-96 border-l-2 border-4">
           <img
