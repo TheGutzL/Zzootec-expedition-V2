@@ -31,7 +31,7 @@ const Home = () => {
             <span className="">
               Te ofrecemos un excelente servicio a la mejor calidad/precio
             </span>
-            <button>Cuentame más</button>
+            <Button className="">Cuentame más</Button>
           </div>
           <div className="flex justify-center items-center w-full h-full">
             <img
