@@ -5,3 +5,4 @@ export * from './Home';
 export * from './Location';
 export * from './Ordering';
 export * from './Product';
+export * from './Store';

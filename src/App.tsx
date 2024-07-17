@@ -9,6 +9,7 @@ import {
   Login,
   Product,
   Signup,
+  Store,
 } from "./pages";
 
 function App() {
@@ -45,8 +46,8 @@ function App() {
             element={<Location />}
           />
           <Route
-            path="/products"
-            element={<Product />}
+            path="/store"
+            element={<Store />}
           />
         </Route>
       </Routes>
