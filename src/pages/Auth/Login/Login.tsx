@@ -1,32 +1,67 @@
-import { Button, PasswordInput, TextInput } from "@mantine/core";
-import { User } from "lucide-react";
+import {
+  Anchor,
+  Button,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+import { Lock, User } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="container mx-auto">
-      <div className="rounded-xl bg-gray-100 p-4 my-4 w-1/3 mx-auto shadow-xl">
-        <span className="font-bold text-xl">Inicie Sesion</span>
+    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+      <Paper
+        shadow="md"
+        p="lg"
+        radius="md"
+        className="w-full max-w-md"
+      >
+        <Title
+          order={2}
+          className="mb-6 text-center"
+        >
+          Inicie Sesión
+        </Title>
         <form className="space-y-4">
           <TextInput
-            label="Username"
-            description="Username"
-            placeholder="Username"
-            leftSection={<User />}
+            label="Nombre de usuario"
+            description="Introduce tu nombre de usuario"
+            placeholder="Nombre de usuario"
+            leftSection={<User size={18} />}
           />
           <PasswordInput
-            label="Password"
-            description="Password"
+            label="Contraseña"
+            description="Introduce tu contraseña"
             placeholder="Contraseña"
+            leftSection={<Lock size={18} />}
           />
-          <Button>Iniciar Sesion</Button>
+          <Button
+            fullWidth
+            color="blue"
+            radius="md"
+            size="md"
+          >
+            Iniciar Sesión
+          </Button>
         </form>
-        <div className="mt-4">
-          <span className="text-xs font-semibold">
-            ¿No tienes una cuenta? <Link to="/signup">Registrate</Link>
-          </span>
-        </div>
-      </div>
+        <Text
+          className="text-center"
+          size="sm"
+          mt="md"
+        >
+          ¿No tienes una cuenta?{" "}
+          <Anchor
+            component={Link}
+            to="/signup"
+            size="sm"
+          >
+            Regístrate
+          </Anchor>
+        </Text>
+      </Paper>
     </div>
   );
 };

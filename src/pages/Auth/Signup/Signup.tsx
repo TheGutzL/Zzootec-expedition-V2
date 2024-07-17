@@ -1,41 +1,73 @@
-import { Button, PasswordInput, TextInput } from "@mantine/core";
-import { User } from "lucide-react";
+import {
+  Anchor,
+  Button,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+import { CheckCircle, Lock, User } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
-  // const onSubmit = (values: z.infer<typeof registerSchema>) => {
-  //   console.log(values);
-  // };
-
   return (
-    <div className="container mx-auto">
-      <div className="rounded-xl bg-gray-100 p-4 my-4 w-1/3 mx-auto shadow-xl">
-        <span className="font-bold text-xl">Registrese</span>
+    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+      <Paper
+        shadow="md"
+        p="lg"
+        radius="md"
+        className="w-full max-w-md"
+      >
+        <Title
+          order={2}
+          className="mb-6 text-center"
+        >
+          Regístrese
+        </Title>
         <form className="space-y-4">
           <TextInput
-            label="Username"
-            description="Username"
-            placeholder="Username"
-            leftSection={<User />}
+            label="Nombre de usuario"
+            description="Elige un nombre de usuario único"
+            placeholder="Nombre de usuario"
+            leftSection={<User size={18} />}
           />
           <PasswordInput
-            label="Password"
-            description="Password"
+            label="Contraseña"
+            description="Crea una contraseña segura"
             placeholder="Contraseña"
+            leftSection={<Lock size={18} />}
           />
           <PasswordInput
-            label="Confirm Password"
-            description="Password"
+            label="Confirmar Contraseña"
+            description="Confirma tu contraseña"
             placeholder="Contraseña"
+            leftSection={<CheckCircle size={18} />}
           />
-          <Button>Registrarse</Button>
+          <Button
+            fullWidth
+            color="blue"
+            radius="md"
+            size="md"
+          >
+            Registrarse
+          </Button>
         </form>
-        <div className="mt-4">
-          <span className="text-xs font-semibold">
-            Si ya tienes una cuenta. <Link to="/login">Inicia Sesion</Link>
-          </span>
-        </div>
-      </div>
+        <Text
+          className="text-center"
+          size="sm"
+          mt="md"
+        >
+          ¿Ya tienes una cuenta?{" "}
+          <Anchor
+            component={Link}
+            to="/login"
+            size="sm"
+          >
+            Inicia Sesión
+          </Anchor>
+        </Text>
+      </Paper>
     </div>
   );
 };
