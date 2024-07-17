@@ -26,7 +26,7 @@ const Navbar = () => {
               variant="link"
               className="text-white"
             >
-              Inicio
+              Nosotros
             </Button>
           </Link>
           <Link to={"/"}>
