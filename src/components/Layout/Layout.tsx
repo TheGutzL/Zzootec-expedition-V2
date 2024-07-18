@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 import { Footer } from "../Footer";
 import { Navbar } from "../Navbar";
 
@@ -10,6 +11,8 @@ const Layout = () => {
         <Outlet />
       </div>
       <Footer />
+
+      <Toaster closeButton richColors position="bottom-right"/>
     </div>
   );
 };
