@@ -1,10 +1,6 @@
 import { z } from "zod";
-
-export const AddressSchema = z.object({
-  street: z.string(),
-  houseNumber: z.string(),
-  zipCode: z.string(),
-});
+import { AddressSchema } from "./address";
+import { RoleSchema } from "./role";
 
 export const UserSchema = z.object({
   id: z.number(),
@@ -13,6 +9,11 @@ export const UserSchema = z.object({
   lastName: z.string(),
   email: z.string().email(),
   address: AddressSchema,
+  isEnabled: z.boolean(),
+  accountNoExpired: z.boolean(),
+  accountNoLocked: z.boolean(),
+  credentialNoExpired: z.boolean(),
+  roles: z.array(RoleSchema),
 });
 
 export type UserSchemaInfer = z.infer<typeof UserSchema>;

@@ -26,12 +26,7 @@ export const useAuthStore = create(
           isAuth: true,
         })),
       setUser: (user: UserSchemaInfer) => set({ user }),
-      logout: () =>
-        set(() => ({
-          token: "",
-          user: undefined,
-          isAuth: false,
-        })),
+      logout: () => set({ token: "", user: undefined, isAuth: false }),
     }),
     { name: "auth" }
   )

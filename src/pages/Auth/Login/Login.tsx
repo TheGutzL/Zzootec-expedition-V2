@@ -1,4 +1,6 @@
+import { getUserInfoRequest, loginRequest } from "@/api/auth";
 import { loginSchema, LoginSchemaInfer } from "@/models";
+import { useAuthStore } from "@/store";
 import {
   Anchor,
   Button,
@@ -24,9 +26,15 @@ const Login = () => {
     validate: zodResolver(loginSchema),
   });
 
-  const handleSubmit = (values: LoginSchemaInfer) => {
+  const { setToken, setUser } = useAuthStore();
+
+  const handleSubmit = async (values: LoginSchemaInfer) => {
     try {
-      toast.success("Inicio de sesion exitoso");
+      const response = await loginRequest(values);
+      const { jwt, username } = response;
+      setToken(jwt);
+      const userInfo = await getUserInfoRequest(username);
+      setUser(userInfo);
     } catch (error) {
       toast.error(`Error: ${error}`);
     }
