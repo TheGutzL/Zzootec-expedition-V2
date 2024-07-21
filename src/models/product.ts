@@ -1,6 +1,6 @@
+import { PaginatedResponse } from "@/types/paginatedResponse";
 import { z } from "zod";
 import { CategorySchema } from "./category";
-
 
 export const ProductSchema = z.object({
   id: z.number(),
@@ -9,7 +9,12 @@ export const ProductSchema = z.object({
   price: z.number(),
   quantity: z.number(),
   image: z.string().url(),
-  category: CategorySchema
-})
+  category: CategorySchema,
+});
 
 export type ProductSchemaInfer = z.infer<typeof ProductSchema>;
+export type PaginatedProducts = PaginatedResponse<ProductSchemaInfer> & {
+  _embedded: {
+    productResponseList: ProductSchemaInfer[];
+  };
+};

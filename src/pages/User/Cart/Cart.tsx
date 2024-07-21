@@ -1,11 +1,46 @@
+import { createOrder } from "@/api/order";
+import { useAuthStore } from "@/store";
 import { useCartStore } from "@/store/cart";
 import { ActionIcon, Button, Divider, Paper } from "@mantine/core";
 import { Trash2 } from "lucide-react";
+import { toast } from "sonner";
 
 const Cart = () => {
+  const { user } = useAuthStore();
   const { cart, removeFromCart } = useCartStore();
 
-  const total = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
+  const total = cart.reduce(
+    (acc, item) => acc + item.desiredQuantity * item.price,
+    0
+  );
+
+  const onCheckout = async () => {
+    if (!user) {
+      toast.error("Debes iniciar sesión para continuar");
+      return;
+    }
+
+    const orderData = {
+      userId: user.id,
+      status: "PENDING" as const,
+      shippingAddressId: 4,
+      products: cart.map((item) => ({
+        productId: item.id,
+        quantity: item.desiredQuantity,
+      })),
+    };
+
+    try {
+      const response = await createOrder(orderData);
+      toast.success("Orden creada exitosamente");
+
+      if (response.data.payment_url) {
+        window.location.href = response.data.payment_url;
+      }
+    } catch (error) {
+      toast.error("Error al crear la orden");
+    }
+  };
 
   return (
     <div className="container mx-auto">
@@ -31,7 +66,7 @@ const Cart = () => {
                 />
                 <span>{item.name}</span>
               </div>
-              <span>Cantidad: {item.quantity}</span>
+              <span>Cantidad: {item.desiredQuantity}</span>
               <span>S/.{item.price.toFixed(2)}</span>
               <ActionIcon
                 variant="filled"
@@ -48,11 +83,16 @@ const Cart = () => {
           <Divider className="my-4" />
           <div className="flex justify-between">
             <span className="font-bold">Total:</span>
-            <span>${total.toFixed(2)}</span>
+            <span>S/.{total.toFixed(2)}</span>
           </div>
         </Paper>
         <div>
-          <Button color="green">Proceder al Pago</Button>
+          <Button
+            onClick={onCheckout}
+            color="green"
+          >
+            Proceder al Pago
+          </Button>
         </div>
       </div>
     </div>

@@ -8,6 +8,10 @@ import {
   Home,
   Location,
   Login,
+  Order,
+  OrderDetail,
+  PaymentFail,
+  PaymentSuccess,
   ProductDetail,
   Profile,
   Settings,
@@ -49,6 +53,14 @@ function App() {
             element={<Cart />}
           />
           <Route
+            path="/orders"
+            element={<Order />}
+          />
+          <Route
+            path="/orders/:id"
+            element={<OrderDetail />}
+          />
+          <Route
             path="/contact"
             element={<Contact />}
           />
@@ -65,8 +77,16 @@ function App() {
             element={<Store />}
           />
           <Route
-            path="/product/:productId"
+            path="/product/:id"
             element={<ProductDetail />}
+          />
+          <Route
+            path="/payment/success/:id"
+            element={<PaymentSuccess />}
+          />
+          <Route
+            path="/payment/fail"
+            element={<PaymentFail />}
           />
         </Route>
       </Routes>

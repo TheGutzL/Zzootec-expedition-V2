@@ -1,39 +1,39 @@
 import { getProductById } from "@/api/products";
-import { ProductSchemaInfer } from "@/models/product";
+import { CartItemSchema } from "@/models/cartItem";
 import { useCartStore } from "@/store/cart";
 import { Button, Divider, Image, Paper } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
 import { ShoppingCart } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
 const ProductDetail = () => {
-  const { addToCart } = useCartStore();
-  const { productId } = useParams();
-  const [product, setProduct] = useState<ProductSchemaInfer | null>(null);
+  const { cart, addToCart } = useCartStore();
+  const { id } = useParams();
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      if (productId) {
-        try {
-          const response = await getProductById(Number(productId));
-          setProduct(response.data);
-        } catch (error) {
-          toast.error("Ocurrió un error al cargar el producto");
-        }
-      }
-    };
-
-    fetchProduct();
-  }, [productId]);
-
+  const {
+    data: product,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["product", id],
+    queryFn: async () => getProductById(Number(id)),
+  });
   const handleAddToCart = () => {
-    if (product) {
-      const cartItem = { ...product, desiredQuantity: 1 };
-      addToCart(cartItem);
-      toast.success("Producto agregado al carrito");
+    const isProductInCart = cart.some((item) => item.id === product?.id);
+
+    if (isProductInCart) {
+      toast.error("Producto ya se encuentra en el carrito");
+      return;
     }
+
+    const cartItem = CartItemSchema.parse({ ...product, desiredQuantity: 1 });
+    addToCart(cartItem);
+    toast.success("Producto agregado al carrito");
   };
+
+  if (isLoading) return <div>Cargando...</div>;
+  if (isError) return <div>Error al cargar</div>;
 
   return (
     <div className="container mx-auto">

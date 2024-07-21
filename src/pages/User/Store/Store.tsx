@@ -1,50 +1,49 @@
 import { getAllProductsPaginated } from "@/api/products";
 import CardProduct from "@/components/CardProduct/CardProduct";
-import { ProductSchemaInfer } from "@/models/product";
 import "@mantine/carousel/styles.css";
 import { Pagination } from "@mantine/core";
-import { usePagination } from "@mantine/hooks";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import { toast } from "sonner";
 
 const Store = () => {
-  const [products, setProducts] = useState<ProductSchemaInfer[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [pageSize] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const pagination = usePagination({
-    total: totalPages,
-    initialPage: 1,
-    siblings: 2,
-    onChange: (page) => setCurrentPage(page),
+  const {
+    data: paginatedProducts,
+    isSuccess,
+    isError,
+    isPending,
+  } = useQuery({
+    queryKey: ["products", currentPage, pageSize],
+    queryFn: async () =>
+      getAllProductsPaginated(currentPage - 1, pageSize, "name,asc"),
   });
 
-  const [currentPage, setCurrentPage] = useState(pagination.active);
-
   useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await getAllProductsPaginated(
-          currentPage - 1,
-          pageSize,
-          "name,asc"
-        );
-        setProducts(response.data.content);
-        setTotalPages(response.data.totalPages);
-      } catch (error) {
-        toast.error("Error al cargar los productos");
-      }
-    };
-    loadProducts();
-  }, [currentPage, pageSize]);
+    if (isSuccess && paginatedProducts) {
+      setTotalPages(paginatedProducts.page.totalPages);
+    }
+  }, [isSuccess, isError, paginatedProducts]);
 
   const options = [
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ];
+
+  if (isError) {
+    toast.error("Error al cargar los productos");
+    return <div>Error al cargar los productos</div>;
+  }
+
+  if (isPending) {
+    return <div>Cargando...</div>;
+  }
 
   return (
     <div className="container mx-auto grid grid-cols-1 md:grid-cols-1 gap-4 py-4">
@@ -57,7 +56,8 @@ const Store = () => {
           <div className="flex flex-col gap-2">
             <span className="text-xl font-bold">Catalogo</span>
             <span className="text-xs">
-              Mostrando {products.length} resultados encontrados
+              Mostrando {paginatedProducts.page.totalElements} resultados
+              encontrados
             </span>
           </div>
           <Select
@@ -66,7 +66,7 @@ const Store = () => {
           />
         </div>
         <div className="grid grid-cols-3 gap-4">
-          {products.map((product) => (
+          {paginatedProducts._embedded.productResponseList.map((product) => (
             <CardProduct
               key={product.id}
               product={product}

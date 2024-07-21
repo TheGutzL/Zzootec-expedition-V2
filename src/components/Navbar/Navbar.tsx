@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/store";
 import { Button, Menu } from "@mantine/core";
-import { LogOut, Settings, ShoppingBag, User } from "lucide-react";
+import { LogOut, Settings, ShoppingBag, ShoppingCart, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserButton } from "../UserButton";
@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-gray-200 py-4 shadow-md">
+    <div className="bg-gray-200 py-4 drop-shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img
@@ -91,8 +91,13 @@ const Navbar = () => {
                 </Menu.Item>
               </Link>
               <Link to="/cart">
-                <Menu.Item leftSection={<ShoppingBag className="w-4 h-4" />}>
+                <Menu.Item leftSection={<ShoppingCart className="w-4 h-4" />}>
                   Carrito
+                </Menu.Item>
+              </Link>
+              <Link to="/orders">
+                <Menu.Item leftSection={<ShoppingBag className="w-4 h-4" />}>
+                  Ordenes
                 </Menu.Item>
               </Link>
               <Link to="/settings">

@@ -18,9 +18,19 @@ export const useCartStore = create(
     (set) => ({
       cart: [],
       addToCart: (product: CartItem) =>
-        set((state) => ({
-          cart: [...state.cart, product],
-        })),
+        set((state) => {
+          const isProductInCart = state.cart.some(
+            (item) => item.id === product.id
+          );
+
+          if (isProductInCart) {
+            return { ...state };
+          } else {
+            return {
+              cart: [...state.cart, product],
+            };
+          }
+        }),
       removeFromCart: (productId) =>
         set((state) => ({
           cart: state.cart.filter((product) => product.id !== productId),
