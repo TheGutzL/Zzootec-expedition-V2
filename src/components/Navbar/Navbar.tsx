@@ -1,8 +1,12 @@
+import { useAuthStore } from "@/store";
+import { Button, Menu } from "@mantine/core";
+import { LogOut, Settings, User } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { UserButton } from "../UserButton";
 
 const Navbar = () => {
+  const { isAuth, user, logout } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const links = [
     { label: "Inicio", to: "/" },
@@ -60,27 +64,55 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-4">
-          <Link to="/login">
-            <Button
-              variant="outline"
-              color="gray"
-              size="xs"
-              className="text-white border-white hover:border-gray-300"
-            >
-              Iniciar Sesión
-            </Button>
-          </Link>
-          <Link to="/signup">
-            <Button
-              color="blue"
-              size="xs"
-              className="text-white bg-blue-500 hover:bg-blue-600"
-            >
-              Registrarse
-            </Button>
-          </Link>
-        </div>
+        {isAuth ? (
+          <Menu
+            shadow="md"
+            width={200}
+          >
+            <Menu.Target>
+              <UserButton
+                image="https://images.unsplash.com/photo-1612838320302-3b3b3f1b3b3b"
+                name={user?.firstName + " " + user?.lastName}
+                email={user?.email ?? "No disponible"}
+              />
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Label>Applicacion</Menu.Label>
+              <Menu.Item leftSection={<User className="w-4 h-4" />}>
+                Perfil
+              </Menu.Item>
+              <Menu.Item leftSection={<Settings className="w-4 h-4" />}>
+                Opciones
+              </Menu.Item>
+              <Menu.Item onClick={logout} leftSection={<LogOut className="w-4 h-4" />}>
+                Cerrar Sesion
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        ) : (
+          <div className="flex items-center gap-4">
+            <Link to="/login">
+              <Button
+                variant="outline"
+                color="gray"
+                size="xs"
+                className="text-white border-white hover:border-gray-300"
+              >
+                Iniciar Sesión
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button
+                color="blue"
+                size="xs"
+                className="text-white bg-blue-500 hover:bg-blue-600"
+              >
+                Registrarse
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

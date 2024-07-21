@@ -1,4 +1,6 @@
+import { getUserInfoRequest, signupRequest } from "@/api/auth";
 import { signupSchema, SignupSchemaInfer } from "@/models";
+import { useAuthStore } from "@/store";
 import {
   Anchor,
   Button,
@@ -15,6 +17,8 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const Signup = () => {
+  const { setToken, setUser } = useAuthStore();
+
   const form = useForm<SignupSchemaInfer>({
     mode: "uncontrolled",
     initialValues: {
@@ -28,9 +32,21 @@ const Signup = () => {
     validate: zodResolver(signupSchema),
   });
 
-  const handleSubmit = (values: SignupSchemaInfer) => {
+  const handleSubmit = async (values: SignupSchemaInfer) => {
     try {
-      toast.success("Registro");
+      const requestData = {
+        ...values,
+        roleRequest: {
+          roleListName: ["USER"],
+        },
+      };
+
+      const response = await signupRequest(requestData);
+      const { jwt, username } = response.data;
+      setToken(jwt);
+      const userInfo = await getUserInfoRequest(username);
+      setUser(userInfo);
+      toast.success("Registro exitoso");
     } catch (error) {
       toast.error(`Error: ${error}`);
     }

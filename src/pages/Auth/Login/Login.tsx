@@ -13,10 +13,11 @@ import {
 import { useForm } from "@mantine/form";
 import { Lock, User } from "lucide-react";
 import { zodResolver } from "mantine-form-zod-resolver";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Login = () => {
+  const navigate = useNavigate();
   const form = useForm<LoginSchemaInfer>({
     mode: "uncontrolled",
     initialValues: {
@@ -35,6 +36,8 @@ const Login = () => {
       setToken(jwt);
       const userInfo = await getUserInfoRequest(username);
       setUser(userInfo);
+      toast.success("Inicio de sesión exitoso");
+      navigate("/");
     } catch (error) {
       toast.error(`Error: ${error}`);
     }

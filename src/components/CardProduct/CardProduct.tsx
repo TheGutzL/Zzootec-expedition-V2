@@ -1,6 +1,16 @@
+import { ProductSchemaInfer } from "@/models/product";
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
+import { ShoppingCart } from "lucide-react";
 
-const CardProduct = () => {
+interface CardProductProps {
+  product: ProductSchemaInfer;
+}
+
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const CardProduct = ({ product }: CardProductProps) => {
   return (
     <Card
       shadow="sm"
@@ -11,9 +21,10 @@ const CardProduct = () => {
     >
       <Card.Section>
         <Image
-          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-          alt="Norway"
-          className="w-full max-h-60 object-cover"
+          src={product.image}
+          alt={product.name}
+          className="w-full h-48 object-cover sm:h-56 md:h-64 lg:h-72"
+          fit="cover"
         />
       </Card.Section>
 
@@ -21,27 +32,27 @@ const CardProduct = () => {
         justify="space-between"
         mt="md"
         mb="xs"
+        className="flex flex-col sm:flex-row"
       >
         <Text
           fw={500}
-          className="text-gray-800"
+          className="text-gray-800 capitalize"
         >
-          Norway
+          {product.name}
         </Text>
         <Badge
           color="pink"
-          className="bg-pink-500 text-white"
+          className="bg-pink-500 text-white self-start sm:self-auto"
         >
-          On sale
+          {product.category.name}
         </Badge>
       </Group>
 
       <Text
         size="sm"
-        className="text-gray-600"
+        className="text-gray-600 font-semibold"
       >
-        With Fjord Tours you can explore more of the magical fjord landscapes
-        with tours and activities on and around the fjords of Norway
+        {capitalizeFirstLetter(product.description)}
       </Text>
 
       <Button
@@ -50,8 +61,9 @@ const CardProduct = () => {
         mt="md"
         radius="md"
         className="mt-4 bg-blue-500 text-white hover:bg-blue-600"
+        leftSection={<ShoppingCart />}
       >
-        Book classic tour now
+        Añadir al carrito
       </Button>
     </Card>
   );

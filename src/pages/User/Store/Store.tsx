@@ -1,10 +1,34 @@
+import { getAllProductsPaginated } from "@/api/products";
 import CardProduct from "@/components/CardProduct/CardProduct";
+import { ProductSchemaInfer } from "@/models/product";
 import "@mantine/carousel/styles.css";
+import { Pagination } from "@mantine/core";
+import { useEffect, useState } from "react";
 import Select from "react-select";
+import { toast } from "sonner";
 
 const Store = () => {
+  const [products, setProducts] = useState<ProductSchemaInfer[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageSize] = useState(5);
 
-  
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await getAllProductsPaginated(
+          currentPage - 1,
+          pageSize,
+          "name,asc"
+        );
+        setProducts(response.data.content);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        toast.error("Error al cargar los productos");
+      }
+    };
+    loadProducts();
+  }, [currentPage, pageSize, totalPages]);
 
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -21,11 +45,11 @@ const Store = () => {
         </div>
       </div>
       <div className="bg-gray-200 col-span-1 md:col-span-3 p-4 rounded-xl shadow-lg">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-4">
           <div className="flex flex-col gap-2">
             <span className="text-xl font-bold">Catalogo</span>
             <span className="text-xs">
-              Mostrando los 6 resultados encontrados
+              Mostrando {products.length} resultados encontrados
             </span>
           </div>
           <Select
@@ -34,13 +58,21 @@ const Store = () => {
           />
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
+          {products.map((product) => (
+            <CardProduct
+              key={product.id}
+              product={product}
+            />
+          ))}
         </div>
+
+        <Pagination
+          total={totalPages}
+          value={currentPage}
+          onChange={setCurrentPage}
+          siblings={2}
+          mt="sm"
+        />
       </div>
     </div>
   );

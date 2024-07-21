@@ -1,16 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Layout, NotFound } from "./components";
-import {
-  About,
-  Contact,
-  Home,
-  Location,
-  Login,
-  Product,
-  Signup,
-  Store,
-} from "./pages";
+import { About, Contact, Home, Location, Login, Signup, Store } from "./pages";
 
 function App() {
   return (
