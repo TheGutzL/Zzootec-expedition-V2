@@ -2,7 +2,7 @@ import { z } from "zod";
 import { CategorySchema } from "./category";
 
 
-export const productSchema = z.object({
+export const ProductSchema = z.object({
   id: z.number(),
   name: z.string(),
   description: z.string(),
@@ -12,4 +12,4 @@ export const productSchema = z.object({
   category: CategorySchema
 })
 
-export type ProductSchemaInfer = z.infer<typeof productSchema>;
+export type ProductSchemaInfer = z.infer<typeof ProductSchema>;

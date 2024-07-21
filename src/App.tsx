@@ -1,7 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Layout, NotFound } from "./components";
-import { About, Contact, Home, Location, Login, Signup, Store } from "./pages";
+import {
+  About,
+  Cart,
+  Contact,
+  Home,
+  Location,
+  Login,
+  ProductDetail,
+  Profile,
+  Settings,
+  Signup,
+  Store,
+} from "./pages";
 
 function App() {
   return (
@@ -25,6 +37,18 @@ function App() {
             element={<Signup />}
           />
           <Route
+            path="/profile"
+            element={<Profile />}
+          />
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart />}
+          />
+          <Route
             path="/contact"
             element={<Contact />}
           />
@@ -39,6 +63,10 @@ function App() {
           <Route
             path="/store"
             element={<Store />}
+          />
+          <Route
+            path="/product/:productId"
+            element={<ProductDetail />}
           />
         </Route>
       </Routes>

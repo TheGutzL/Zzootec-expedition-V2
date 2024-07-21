@@ -4,5 +4,7 @@ export * from './Contact';
 export * from './Home';
 export * from './Location';
 export * from './Ordering';
-export * from './Product';
+export * from './ProductDetail';
+export * from './Profile';
+export * from './Settings';
 export * from './Store';

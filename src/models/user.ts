@@ -1,5 +1,5 @@
+import { AddressSchema } from './address';
 import { z } from "zod";
-import { AddressSchema } from "./address";
 import { RoleSchema } from "./role";
 
 export const UserSchema = z.object({

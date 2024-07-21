@@ -7,7 +7,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-gray-400 pt-4">
+    <footer className="bg-gray-200 pt-4">
       <div className="container mx-auto flex flex-wrap justify-between items-center py-8">
         <div className="flex flex-col gap-4 mb-4">
           <img
@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-wrap justify-around gap-10">
           <div className="block">
-            <span className="text-white font-semibold">Links</span>
+            <span className="font-semibold">Links</span>
             <ul className="flex flex-col gap-2 mt-2">
               <li className="cursor-pointer hover:text-white transition-colors">
                 Marketing
@@ -45,7 +45,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="block">
-            <span className="text-white font-semibold">Ayuda</span>
+            <span className="font-semibold">Ayuda</span>
             <ul className="flex flex-col gap-2 mt-2">
               <li className="cursor-pointer hover:text-white transition-colors">
                 Precios
@@ -62,7 +62,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="block">
-            <span className="text-white font-semibold">Compañia</span>
+            <span className="font-semibold">Compañia</span>
             <ul className="flex flex-col gap-2 mt-2">
               <li className="cursor-pointer hover:text-white transition-colors">
                 Acerca
@@ -79,7 +79,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="block">
-            <span className="text-white font-semibold">Legal</span>
+            <span className="font-semibold">Legal</span>
             <ul className="flex flex-col gap-2 mt-2">
               <li className="cursor-pointer hover:text-white transition-colors">
                 Claim

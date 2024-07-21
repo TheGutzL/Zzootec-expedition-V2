@@ -1,6 +1,7 @@
 import { ProductSchemaInfer } from "@/models/product";
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
-import { ShoppingCart } from "lucide-react";
+import { Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface CardProductProps {
   product: ProductSchemaInfer;
@@ -11,6 +12,8 @@ const capitalizeFirstLetter = (string: string) => {
 };
 
 const CardProduct = ({ product }: CardProductProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card
       shadow="sm"
@@ -48,12 +51,9 @@ const CardProduct = ({ product }: CardProductProps) => {
         </Badge>
       </Group>
 
-      <Text
-        size="sm"
-        className="text-gray-600 font-semibold"
-      >
+      <span className="text-gray-600 font-semibold text-sm">
         {capitalizeFirstLetter(product.description)}
-      </Text>
+      </span>
 
       <Button
         color="blue"
@@ -61,9 +61,10 @@ const CardProduct = ({ product }: CardProductProps) => {
         mt="md"
         radius="md"
         className="mt-4 bg-blue-500 text-white hover:bg-blue-600"
-        leftSection={<ShoppingCart />}
+        leftSection={<Search />}
+        onClick={() => navigate(`/product/${product.id}`)}
       >
-        Añadir al carrito
+        Ver Producto
       </Button>
     </Card>
   );

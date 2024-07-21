@@ -7,3 +7,5 @@ export const getAllProductsPaginated = async (
   size: number,
   sort: string
 ) => axios.get(`/api/v1/products/paginated?page=${page}&size=${size}&sort=${sort}`);
+
+export const getProductById = async (id: number) => axios.get(`/api/v1/products/${id}`);

@@ -1,4 +1,4 @@
-import { Avatar, Group, Text, UnstyledButton } from "@mantine/core";
+import { Avatar, Text, UnstyledButton } from "@mantine/core";
 import { ArrowRight } from "lucide-react";
 import { forwardRef } from "react";
 
@@ -20,30 +20,20 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
       }}
       {...others}
     >
-      <Group>
+      <div className="flex gap-4 justify-center items-center">
         <Avatar
           src={image}
           radius="xl"
         />
 
         <div className="flex flex-col">
-          <Text
-            size="sm"
-            fw={500}
-          >
-            {name}
-          </Text>
+          <span className="text-sm font-semibold">{name}</span>
 
-          <Text
-            c="dimmed"
-            size="xs"
-          >
-            {email}
-          </Text>
+          <Text className="text-xs">{email}</Text>
         </div>
 
         {icon || <ArrowRight size="1rem" />}
-      </Group>
+      </div>
     </UnstyledButton>
   )
 );

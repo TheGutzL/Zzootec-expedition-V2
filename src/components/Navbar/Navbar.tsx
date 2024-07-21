@@ -1,11 +1,12 @@
 import { useAuthStore } from "@/store";
 import { Button, Menu } from "@mantine/core";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, ShoppingBag, User } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserButton } from "../UserButton";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { isAuth, user, logout } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const links = [
@@ -16,12 +17,17 @@ const Navbar = () => {
     { label: "Ubicanos", to: "/location" },
   ];
 
+  const onLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
-    <div className="bg-slate-900 py-4 shadow-md">
+    <div className="bg-gray-200 py-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img
-            src="./images/logo.jpg"
+            src="/images/logo.jpg"
             alt="Logo"
             className="w-14 h-14 rounded-full"
           />
@@ -57,7 +63,7 @@ const Navbar = () => {
             >
               <Link
                 to={link.to}
-                className="text-white hover:text-gray-300 transition duration-150 ease-in-out"
+                className="transition duration-150 ease-in-out"
               >
                 {link.label}
               </Link>
@@ -78,14 +84,26 @@ const Navbar = () => {
             </Menu.Target>
 
             <Menu.Dropdown>
-              <Menu.Label>Applicacion</Menu.Label>
-              <Menu.Item leftSection={<User className="w-4 h-4" />}>
-                Perfil
-              </Menu.Item>
-              <Menu.Item leftSection={<Settings className="w-4 h-4" />}>
-                Opciones
-              </Menu.Item>
-              <Menu.Item onClick={logout} leftSection={<LogOut className="w-4 h-4" />}>
+              <Menu.Label>Aplicacion</Menu.Label>
+              <Link to="/profile">
+                <Menu.Item leftSection={<User className="w-4 h-4" />}>
+                  Perfil
+                </Menu.Item>
+              </Link>
+              <Link to="/cart">
+                <Menu.Item leftSection={<ShoppingBag className="w-4 h-4" />}>
+                  Carrito
+                </Menu.Item>
+              </Link>
+              <Link to="/settings">
+                <Menu.Item leftSection={<Settings className="w-4 h-4" />}>
+                  Opciones
+                </Menu.Item>
+              </Link>
+              <Menu.Item
+                onClick={onLogout}
+                leftSection={<LogOut className="w-4 h-4" />}
+              >
                 Cerrar Sesion
               </Menu.Item>
             </Menu.Dropdown>
