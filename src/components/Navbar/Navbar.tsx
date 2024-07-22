@@ -1,6 +1,13 @@
 import { useAuthStore } from "@/store";
 import { Button, Menu } from "@mantine/core";
-import { LogOut, Settings, ShoppingBag, ShoppingCart, User } from "lucide-react";
+import {
+  LogOut,
+  PenTool,
+  Settings,
+  ShoppingBag,
+  ShoppingCart,
+  User,
+} from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserButton } from "../UserButton";
@@ -21,6 +28,8 @@ const Navbar = () => {
     logout();
     navigate("/");
   };
+
+  const isAdmin = user?.roles.some((role) => role.roleName === "ADMIN");
 
   return (
     <div className="bg-gray-200 py-4 drop-shadow-lg">
@@ -105,6 +114,13 @@ const Navbar = () => {
                   Opciones
                 </Menu.Item>
               </Link>
+              {isAdmin && (
+                <Link to="/admin">
+                  <Menu.Item leftSection={<PenTool className="w-4 h-4" />}>
+                    Administracion
+                  </Menu.Item>
+                </Link>
+              )}
               <Menu.Item
                 onClick={onLogout}
                 leftSection={<LogOut className="w-4 h-4" />}

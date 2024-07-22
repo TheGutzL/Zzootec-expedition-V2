@@ -19,7 +19,7 @@ const Store = () => {
     isError,
     isPending,
   } = useQuery({
-    queryKey: ["products", currentPage, pageSize],
+    queryKey: ["productsStore", currentPage, pageSize],
     queryFn: async () =>
       getAllProductsPaginated(currentPage - 1, pageSize, "name,asc"),
   });

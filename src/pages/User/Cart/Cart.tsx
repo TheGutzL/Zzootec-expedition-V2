@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 const Cart = () => {
   const { user } = useAuthStore();
-  const { cart, removeFromCart } = useCartStore();
+  const { cart, removeFromCart, clearCart } = useCartStore();
 
   const total = cart.reduce(
     (acc, item) => acc + item.desiredQuantity * item.price,
@@ -33,7 +33,7 @@ const Cart = () => {
     try {
       const response = await createOrder(orderData);
       toast.success("Orden creada exitosamente");
-
+      clearCart();
       if (response.data.payment_url) {
         window.location.href = response.data.payment_url;
       }
