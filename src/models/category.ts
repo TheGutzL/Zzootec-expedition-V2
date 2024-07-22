@@ -1,3 +1,4 @@
+import { PaginatedResponse } from "@/types/paginatedResponse";
 import { z } from "zod";
 
 export const CategorySchema = z.object({
@@ -7,3 +8,8 @@ export const CategorySchema = z.object({
 })
 
 export type CategorySchemaInfer = z.infer<typeof CategorySchema>;
+export type PaginatedCategories = PaginatedResponse<CategorySchemaInfer> & {
+  _embedded: {
+    categoryResponseList: CategorySchemaInfer[];
+  };
+}

@@ -1,5 +1,6 @@
-import { AddressSchema } from './address';
+import { PaginatedResponse } from "@/types/paginatedResponse";
 import { z } from "zod";
+import { AddressSchema } from "./address";
 import { RoleSchema } from "./role";
 
 export const UserSchema = z.object({
@@ -17,3 +18,8 @@ export const UserSchema = z.object({
 });
 
 export type UserSchemaInfer = z.infer<typeof UserSchema>;
+export type PaginatedUsers = PaginatedResponse<UserSchemaInfer> & {
+  _embedded: {
+    userResponseList: UserSchemaInfer[];
+  };
+};

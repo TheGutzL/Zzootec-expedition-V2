@@ -31,7 +31,7 @@ const SidebarAdmin = () => {
         />
         <NavLink
           component={Link}
-          to="/admin/products"
+          to="/admin/users"
           label="Usuarios"
           leftSection={<User2 />}
         />

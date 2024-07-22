@@ -1,12 +1,13 @@
-import { getAllProductsPaginated } from "@/api/products";
+import { deleteProductRequest, getAllProductsPaginated } from "@/api/products";
 import { ActionIcon, Pagination, Table } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Edit, Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const ProductPanel = () => {
+  const queryClient = useQueryClient();
   const [totalPages, setTotalPages] = useState(0);
   const [pageSize] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +23,19 @@ const ProductPanel = () => {
     queryKey: ["productsPanel", currentPage, pageSize],
     queryFn: async () =>
       getAllProductsPaginated(currentPage - 1, pageSize, "name,asc"),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => await deleteProductRequest(Number(id)),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["productsPanel"] });
+    },
+    onSuccess: () => {
+      toast.success("Producto eliminado exitosamente");
+    },
+    onError: () => {
+      toast.error("Error al eliminar el producto");
+    },
   });
 
   useEffect(() => {
@@ -71,6 +85,7 @@ const ProductPanel = () => {
                     variant="filled"
                     color="red"
                     size="md"
+                    onClick={() => deleteMutation.mutate(product.id)}
                   >
                     <Trash2Icon className="w-[70%] h-[70%] stroke-[1.5]" />
                   </ActionIcon>

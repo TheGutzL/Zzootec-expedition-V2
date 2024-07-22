@@ -30,3 +30,6 @@ export const updateProduct = async (
   id: number,
   product: ProductRequestSchemaInfer
 ) => axios.put(`/api/v1/products/${id}`, product);
+
+export const deleteProductRequest = async (id: number) =>
+  axios.delete(`/api/v1/products/${id}`);

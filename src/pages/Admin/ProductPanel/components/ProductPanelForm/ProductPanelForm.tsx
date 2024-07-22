@@ -47,7 +47,7 @@ const ProductPanelForm = () => {
     }
   }, [product, setValue]);
 
-  const mutation = useMutation({
+  const updateMutation = useMutation({
     mutationFn: async (product: ProductRequestSchemaInfer) =>
       await updateProduct(Number(id), product),
     onSettled: () => {
@@ -62,7 +62,7 @@ const ProductPanelForm = () => {
   });
 
   const onSubmit: SubmitHandler<ProductRequestSchemaInfer> = (data) => {
-    mutation.mutate(data);
+    updateMutation.mutate(data);
   };
 
   return (
