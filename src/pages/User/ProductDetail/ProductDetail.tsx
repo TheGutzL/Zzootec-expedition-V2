@@ -1,4 +1,4 @@
-import { getProductById } from "@/api/products";
+import { getProductCartById } from "@/api/products";
 import { CartItemSchema } from "@/models/cartItem";
 import { useCartStore } from "@/store/cart";
 import { Button, Divider, Image, Paper } from "@mantine/core";
@@ -17,7 +17,7 @@ const ProductDetail = () => {
     isLoading,
   } = useQuery({
     queryKey: ["product", id],
-    queryFn: async () => getProductById(Number(id)),
+    queryFn: async () => getProductCartById(Number(id)),
   });
   const handleAddToCart = () => {
     const isProductInCart = cart.some((item) => item.id === product?.id);

@@ -1,2 +1,2 @@
-export { default as ProductPanel } from './ProductPanel';
-export * from './components';
+export * from "./components/ProductPanelForm";
+export { default as ProductPanel } from "./ProductPanel";

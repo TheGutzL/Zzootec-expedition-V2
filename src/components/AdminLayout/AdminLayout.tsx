@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Toaster } from "sonner";
 import { SidebarAdmin } from "../SidebarAdmin";
 
 const AdminLayout = () => {
@@ -10,6 +11,8 @@ const AdminLayout = () => {
       <div className="col-span-10 bg-gray-100">
         <Outlet />
       </div>
+
+      <Toaster />
     </div>
   );
 };

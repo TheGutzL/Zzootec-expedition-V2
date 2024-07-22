@@ -1,1 +1,1 @@
-export { default as ProductPanelForm } from './ProductPanelForm';
+export * from './ProductPanelForm';
