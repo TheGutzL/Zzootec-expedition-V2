@@ -1,7 +1,6 @@
 import { getAllCategories } from "@/api/categories";
 import { getProductById, updateProduct } from "@/api/products";
 import { ProductRequestSchemaInfer } from "@/models/product";
-import { DevTool } from "@hookform/devtools";
 import { Button, TextInput } from "@mantine/core";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -136,7 +135,7 @@ const ProductPanelForm = () => {
         </form>
       </div>
 
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </div>
   );
 };

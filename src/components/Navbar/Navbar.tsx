@@ -29,7 +29,7 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const isAdmin = user?.roles.some((role) => role.roleName === "ADMIN");
+  const isAdmin = isAuth && user?.roles.some((role) => role.roleName === "ADMIN");
 
   return (
     <div className="bg-gray-200 py-4 drop-shadow-lg">

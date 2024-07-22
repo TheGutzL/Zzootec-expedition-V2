@@ -39,7 +39,7 @@ const OrderDetail = () => {
           </Table.Thead>
           <Table.Tbody>
             {detailOrder?.map((detail) => (
-              <Table.Tr>
+              <Table.Tr key={detail.id}>
                 <Table.Td className="flex items-center gap-4">
                   <img
                     src={detail.product.image}
